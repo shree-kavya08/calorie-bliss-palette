@@ -9,7 +9,7 @@ import { Search, LogOut, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Menu = () => {
-  const [selectedDishes, setSelectedDishes] = useState<number[]>([]);
+  const [selectedDishes, setSelectedDishes] = useState<Record<number, number>>({});
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -20,22 +20,37 @@ const Menu = () => {
     navigate('/login');
   };
 
-  const toggleDish = (dishId: number) => {
-    setSelectedDishes((prev) =>
-      prev.includes(dishId)
-        ? prev.filter((id) => id !== dishId)
-        : [...prev, dishId]
-    );
+  const incrementDish = (dishId: number) => {
+    setSelectedDishes((prev) => ({
+      ...prev,
+      [dishId]: (prev[dishId] || 0) + 1,
+    }));
+  };
+
+  const decrementDish = (dishId: number) => {
+    setSelectedDishes((prev) => {
+      const newQuantity = (prev[dishId] || 0) - 1;
+      if (newQuantity <= 0) {
+        const { [dishId]: _, ...rest } = prev;
+        return rest;
+      }
+      return {
+        ...prev,
+        [dishId]: newQuantity,
+      };
+    });
   };
 
   const clearSelection = () => {
-    setSelectedDishes([]);
+    setSelectedDishes({});
     toast.success('Selection cleared');
   };
 
-  const totalCalories = selectedDishes.reduce((total, dishId) => {
-    const dish = dishes.find((d) => d.id === dishId);
-    return total + (dish?.calories || 0);
+  const uniqueDishesCount = Object.keys(selectedDishes).length;
+  const totalItemsCount = Object.values(selectedDishes).reduce((sum, qty) => sum + qty, 0);
+  const totalCalories = Object.entries(selectedDishes).reduce((total, [dishId, quantity]) => {
+    const dish = dishes.find((d) => d.id === Number(dishId));
+    return total + (dish?.calories || 0) * quantity;
   }, 0);
 
   const filteredDishes = dishes.filter((dish) =>
@@ -79,11 +94,17 @@ const Menu = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-muted-foreground text-sm mb-1">Dishes Selected</p>
+              <p className="text-muted-foreground text-sm mb-1">Unique Dishes</p>
               <p className="text-3xl font-bold gradient-warm bg-clip-text text-transparent">
-                {selectedDishes.length}
+                {uniqueDishesCount}
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-6 text-center">
+              <p className="text-muted-foreground text-sm mb-1">Total Items</p>
+              <p className="text-3xl font-bold gradient-purple bg-clip-text text-transparent">
+                {totalItemsCount}
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 text-center">
@@ -95,7 +116,7 @@ const Menu = () => {
             <div className="glass-card rounded-2xl p-6">
               <Button
                 onClick={clearSelection}
-                disabled={selectedDishes.length === 0}
+                disabled={uniqueDishesCount === 0}
                 className="w-full h-12 rounded-xl bg-muted text-muted-foreground hover:bg-muted/80 disabled:opacity-50"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
@@ -111,8 +132,9 @@ const Menu = () => {
             <DishCard
               key={dish.id}
               dish={dish}
-              isSelected={selectedDishes.includes(dish.id)}
-              onToggle={() => toggleDish(dish.id)}
+              quantity={selectedDishes[dish.id] || 0}
+              onIncrement={() => incrementDish(dish.id)}
+              onDecrement={() => decrementDish(dish.id)}
             />
           ))}
         </div>
