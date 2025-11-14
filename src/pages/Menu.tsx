@@ -3,22 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import DishCard from '@/components/DishCard';
 import { dishes } from '@/data/dishes';
-import { Search, LogOut, Trash2, ShoppingBag } from 'lucide-react';
+import { Search, LogOut, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Menu = () => {
   const [selectedDishes, setSelectedDishes] = useState<number[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -39,14 +31,6 @@ const Menu = () => {
   const clearSelection = () => {
     setSelectedDishes([]);
     toast.success('Selection cleared');
-  };
-
-  const handleOrder = () => {
-    if (selectedDishes.length === 0) {
-      toast.error('Please select at least one dish');
-      return;
-    }
-    setOrderDialogOpen(true);
   };
 
   const totalCalories = selectedDishes.reduce((total, dishId) => {
@@ -108,22 +92,14 @@ const Menu = () => {
                 {totalCalories} kcal
               </p>
             </div>
-            <div className="glass-card rounded-2xl p-6 flex gap-2">
+            <div className="glass-card rounded-2xl p-6">
               <Button
                 onClick={clearSelection}
                 disabled={selectedDishes.length === 0}
-                className="flex-1 h-full rounded-xl bg-muted text-muted-foreground hover:bg-muted/80"
+                className="w-full h-12 rounded-xl bg-muted text-muted-foreground hover:bg-muted/80 disabled:opacity-50"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
-                Clear
-              </Button>
-              <Button
-                onClick={handleOrder}
-                disabled={selectedDishes.length === 0}
-                className="flex-1 h-full rounded-xl gradient-purple text-white hover:scale-105 smooth-transition"
-              >
-                <ShoppingBag className="w-4 h-4 mr-2" />
-                Order
+                Clear Selection
               </Button>
             </div>
           </div>
@@ -147,36 +123,6 @@ const Menu = () => {
           </div>
         )}
       </main>
-
-      {/* Order Dialog */}
-      <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
-        <DialogContent className="rounded-2xl glass-card border-border/50">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold gradient-warm bg-clip-text text-transparent">
-              Order Placed! 🎉
-            </DialogTitle>
-            <DialogDescription className="text-lg pt-4">
-              <div className="space-y-3">
-                <p className="text-foreground">
-                  Order placed for <span className="font-bold text-primary">{selectedDishes.length}</span> items
-                </p>
-                <p className="text-foreground">
-                  Total calories: <span className="font-bold text-primary">{totalCalories} kcal</span>
-                </p>
-                <p className="text-muted-foreground text-sm mt-4">
-                  Your delicious Indian feast is being prepared! 🍛
-                </p>
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <Button
-            onClick={() => setOrderDialogOpen(false)}
-            className="w-full h-12 rounded-xl gradient-warm text-white mt-4"
-          >
-            Got it!
-          </Button>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
