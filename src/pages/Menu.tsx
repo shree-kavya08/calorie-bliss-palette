@@ -96,20 +96,20 @@ const Menu = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-muted-foreground text-sm mb-1">Unique Dishes</p>
-              <p className="text-3xl font-bold gradient-warm bg-clip-text text-transparent">
+              <p className="text-sm mb-1 text-black/60">Unique Dishes</p>
+              <p className="text-3xl font-bold text-black">
                 {uniqueDishesCount}
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-muted-foreground text-sm mb-1">Total Items</p>
-              <p className="text-3xl font-bold gradient-purple bg-clip-text text-transparent">
+              <p className="text-sm mb-1 text-black/60">Total Items</p>
+              <p className="text-3xl font-bold text-black">
                 {totalItemsCount}
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-muted-foreground text-sm mb-1">Total Calories</p>
-              <p className="text-3xl font-bold gradient-cool bg-clip-text text-transparent">
+              <p className="text-sm mb-1 text-black/60">Total Calories</p>
+              <p className="text-3xl font-bold text-black">
                 {totalCalories} kcal
               </p>
             </div>
