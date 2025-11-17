@@ -7,14 +7,16 @@ interface DishCardProps {
   quantity: number;
   onIncrement: () => void;
   onDecrement: () => void;
+  onCardClick: () => void;
 }
 
-const DishCard: React.FC<DishCardProps> = ({ dish, quantity, onIncrement, onDecrement }) => {
+const DishCard: React.FC<DishCardProps> = ({ dish, quantity, onIncrement, onDecrement, onCardClick }) => {
   const isSelected = quantity > 0;
 
   return (
     <div
-      className={`relative glass-card rounded-2xl overflow-hidden smooth-transition hover:scale-105 ${
+      onClick={onCardClick}
+      className={`relative glass-card rounded-2xl overflow-hidden smooth-transition hover:scale-105 cursor-pointer ${
         isSelected ? 'ring-4 ring-primary shadow-glow' : 'hover:shadow-soft'
       }`}
     >
