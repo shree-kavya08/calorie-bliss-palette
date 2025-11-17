@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import DishCard from '@/components/DishCard';
 import DishDetailsModal from '@/components/DishDetailsModal';
+import AllergenFilterBar from '@/components/AllergenFilterBar';
 import { dishes, Dish } from '@/data/dishes';
 import { Search, LogOut, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -14,6 +15,7 @@ const Menu = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -56,9 +58,24 @@ const Menu = () => {
     return total + (dish?.calories || 0) * quantity;
   }, 0);
 
-  const filteredDishes = dishes.filter((dish) =>
-    dish.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const toggleAllergen = (allergen: string) => {
+    setSelectedAllergens((prev) =>
+      prev.includes(allergen)
+        ? prev.filter((a) => a !== allergen)
+        : [...prev, allergen]
+    );
+  };
+
+  const clearAllergenFilters = () => {
+    setSelectedAllergens([]);
+  };
+
+  const filteredDishes = dishes.filter((dish) => {
+    const matchesSearch = dish.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesAllergens = selectedAllergens.length === 0 || 
+      !selectedAllergens.some(allergen => dish.allergens.includes(allergen));
+    return matchesSearch && matchesAllergens;
+  });
 
   const handleDishClick = (dish: Dish) => {
     setSelectedDish(dish);
@@ -91,6 +108,13 @@ const Menu = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Search and Stats */}
         <div className="mb-8 space-y-4 animate-fade-in">
+          {/* Allergen Filter */}
+          <AllergenFilterBar
+            selectedAllergens={selectedAllergens}
+            onToggleAllergen={toggleAllergen}
+            onClearFilters={clearAllergenFilters}
+          />
+
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input

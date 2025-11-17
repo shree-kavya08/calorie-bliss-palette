@@ -38,10 +38,23 @@ const DishCard: React.FC<DishCardProps> = ({ dish, quantity, onIncrement, onDecr
       
       <div className="p-4">
         <h3 className="font-semibold text-lg text-foreground mb-1">{dish.name}</h3>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-2">
           <span className="text-muted-foreground text-sm">{dish.calories} kcal</span>
           <span className="text-xs text-muted-foreground">per serving</span>
         </div>
+        
+        {dish.allergens.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-3">
+            {dish.allergens.slice(0, 3).map((allergen, index) => (
+              <span
+                key={index}
+                className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 border border-orange-200"
+              >
+                {allergen}
+              </span>
+            ))}
+          </div>
+        )}
 
         {!isSelected ? (
           <Button

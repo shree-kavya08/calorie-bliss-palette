@@ -91,6 +91,26 @@ const DishDetailsModal: React.FC<DishDetailsModalProps> = ({ dish, isOpen, onClo
             </div>
           </div>
 
+          {/* Allergens */}
+          {dish.allergens.length > 0 && (
+            <div className="glass-card rounded-xl p-4 border-2 border-orange-200">
+              <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center">
+                <span className="mr-2">⚠️</span>
+                Contains Allergens
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {dish.allergens.map((allergen, index) => (
+                  <Badge
+                    key={index}
+                    className="px-3 py-1 rounded-xl bg-orange-100 text-orange-800 border border-orange-300"
+                  >
+                    {allergen}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Ingredients */}
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Ingredients</h3>

@@ -7,7 +7,11 @@ export interface Dish {
   carbs: number;
   fats: number;
   ingredients: string[];
+  allergens: string[];
 }
+
+export const allergensList = ["Dairy", "Nuts", "Gluten", "Egg", "Soy"] as const;
+export type Allergen = typeof allergensList[number];
 
 export const dishes: Dish[] = [
   {
@@ -18,7 +22,8 @@ export const dishes: Dish[] = [
     protein: 28,
     carbs: 15,
     fats: 35,
-    ingredients: ["Chicken", "Butter", "Tomatoes", "Cream", "Spices", "Onions", "Garlic", "Ginger"]
+    ingredients: ["Chicken", "Butter", "Tomatoes", "Cream", "Spices", "Onions", "Garlic", "Ginger"],
+    allergens: ["Dairy"]
   },
   {
     id: 2,
@@ -28,7 +33,8 @@ export const dishes: Dish[] = [
     protein: 15,
     carbs: 12,
     fats: 18,
-    ingredients: ["Paneer", "Yogurt", "Spices", "Bell Peppers", "Onions", "Lemon"]
+    ingredients: ["Paneer", "Yogurt", "Spices", "Bell Peppers", "Onions", "Lemon"],
+    allergens: ["Dairy"]
   },
   {
     id: 3,
@@ -38,7 +44,8 @@ export const dishes: Dish[] = [
     protein: 22,
     carbs: 65,
     fats: 18,
-    ingredients: ["Basmati Rice", "Chicken/Mutton", "Yogurt", "Saffron", "Spices", "Fried Onions"]
+    ingredients: ["Basmati Rice", "Chicken/Mutton", "Yogurt", "Saffron", "Spices", "Fried Onions"],
+    allergens: ["Dairy"]
   },
   {
     id: 4,
@@ -48,7 +55,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 58,
     fats: 12,
-    ingredients: ["Rice", "Lentils", "Potato", "Onions", "Mustard Seeds", "Curry Leaves"]
+    ingredients: ["Rice", "Lentils", "Potato", "Onions", "Mustard Seeds", "Curry Leaves"],
+    allergens: []
   },
   {
     id: 5,
@@ -58,7 +66,8 @@ export const dishes: Dish[] = [
     protein: 18,
     carbs: 75,
     fats: 25,
-    ingredients: ["Chickpeas", "Flour", "Tomatoes", "Onions", "Spices", "Yogurt"]
+    ingredients: ["Chickpeas", "Flour", "Tomatoes", "Onions", "Spices", "Yogurt"],
+    allergens: ["Gluten", "Dairy"]
   },
   {
     id: 6,
@@ -68,7 +77,8 @@ export const dishes: Dish[] = [
     protein: 6,
     carbs: 30,
     fats: 12,
-    ingredients: ["Potato", "Peas", "Flour", "Spices", "Oil"]
+    ingredients: ["Potato", "Peas", "Flour", "Spices", "Oil"],
+    allergens: ["Gluten"]
   },
   {
     id: 7,
@@ -78,7 +88,8 @@ export const dishes: Dish[] = [
     protein: 16,
     carbs: 18,
     fats: 22,
-    ingredients: ["Spinach", "Paneer", "Cream", "Onions", "Garlic", "Spices"]
+    ingredients: ["Spinach", "Paneer", "Cream", "Onions", "Garlic", "Spices"],
+    allergens: ["Dairy"]
   },
   {
     id: 8,
@@ -88,7 +99,8 @@ export const dishes: Dish[] = [
     protein: 42,
     carbs: 8,
     fats: 20,
-    ingredients: ["Chicken", "Yogurt", "Tandoori Spices", "Lemon", "Ginger", "Garlic"]
+    ingredients: ["Chicken", "Yogurt", "Tandoori Spices", "Lemon", "Ginger", "Garlic"],
+    allergens: ["Dairy"]
   },
   {
     id: 9,
@@ -98,7 +110,8 @@ export const dishes: Dish[] = [
     protein: 9,
     carbs: 52,
     fats: 18,
-    ingredients: ["Wheat Flour", "Potato", "Spices", "Ghee", "Onions"]
+    ingredients: ["Wheat Flour", "Potato", "Spices", "Ghee", "Onions"],
+    allergens: ["Gluten", "Dairy"]
   },
   {
     id: 10,
@@ -108,7 +121,8 @@ export const dishes: Dish[] = [
     protein: 14,
     carbs: 32,
     fats: 12,
-    ingredients: ["Black Lentils", "Kidney Beans", "Butter", "Cream", "Tomatoes", "Spices"]
+    ingredients: ["Black Lentils", "Kidney Beans", "Butter", "Cream", "Tomatoes", "Spices"],
+    allergens: ["Dairy"]
   },
   {
     id: 11,
@@ -118,7 +132,8 @@ export const dishes: Dish[] = [
     protein: 32,
     carbs: 12,
     fats: 32,
-    ingredients: ["Mutton", "Yogurt", "Kashmiri Chili", "Spices", "Onions", "Garlic"]
+    ingredients: ["Mutton", "Yogurt", "Kashmiri Chili", "Spices", "Onions", "Garlic"],
+    allergens: ["Dairy"]
   },
   {
     id: 12,
@@ -128,7 +143,8 @@ export const dishes: Dish[] = [
     protein: 6,
     carbs: 32,
     fats: 3,
-    ingredients: ["Rice", "Lentils", "Vegetables", "Tamarind", "Spices", "Curry Leaves"]
+    ingredients: ["Rice", "Lentils", "Vegetables", "Tamarind", "Spices", "Curry Leaves"],
+    allergens: []
   },
   {
     id: 13,
@@ -138,7 +154,8 @@ export const dishes: Dish[] = [
     protein: 10,
     carbs: 58,
     fats: 20,
-    ingredients: ["Mixed Vegetables", "Butter", "Bread", "Tomatoes", "Onions", "Spices"]
+    ingredients: ["Mixed Vegetables", "Butter", "Bread", "Tomatoes", "Onions", "Spices"],
+    allergens: ["Gluten", "Dairy"]
   },
   {
     id: 14,
@@ -148,7 +165,8 @@ export const dishes: Dish[] = [
     protein: 38,
     carbs: 6,
     fats: 18,
-    ingredients: ["Chicken", "Yogurt", "Spices", "Lemon", "Ginger", "Garlic"]
+    ingredients: ["Chicken", "Yogurt", "Spices", "Lemon", "Ginger", "Garlic"],
+    allergens: ["Dairy"]
   },
   {
     id: 15,
@@ -158,7 +176,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 42,
     fats: 12,
-    ingredients: ["Potato", "Bread", "Gram Flour", "Green Chutney", "Spices"]
+    ingredients: ["Potato", "Bread", "Gram Flour", "Green Chutney", "Spices"],
+    allergens: ["Gluten"]
   },
   {
     id: 16,
@@ -168,7 +187,8 @@ export const dishes: Dish[] = [
     protein: 12,
     carbs: 28,
     fats: 30,
-    ingredients: ["Paneer", "Potato", "Cream", "Tomatoes", "Cashews", "Spices"]
+    ingredients: ["Paneer", "Potato", "Cream", "Tomatoes", "Cashews", "Spices"],
+    allergens: ["Dairy", "Nuts"]
   },
   {
     id: 17,
@@ -178,7 +198,8 @@ export const dishes: Dish[] = [
     protein: 4,
     carbs: 28,
     fats: 3,
-    ingredients: ["Semolina", "Potato", "Chickpeas", "Tamarind Water", "Mint Water", "Spices"]
+    ingredients: ["Semolina", "Potato", "Chickpeas", "Tamarind Water", "Mint Water", "Spices"],
+    allergens: ["Gluten"]
   },
   {
     id: 18,
@@ -188,7 +209,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 48,
     fats: 8,
-    ingredients: ["Milk Powder", "Flour", "Sugar Syrup", "Cardamom", "Rose Water"]
+    ingredients: ["Milk Powder", "Flour", "Sugar Syrup", "Cardamom", "Rose Water"],
+    allergens: ["Dairy", "Gluten"]
   },
   {
     id: 19,
@@ -198,7 +220,8 @@ export const dishes: Dish[] = [
     protein: 28,
     carbs: 18,
     fats: 38,
-    ingredients: ["Chicken", "Yogurt", "Cream", "Cashews", "Onions", "Spices"]
+    ingredients: ["Chicken", "Yogurt", "Cream", "Cashews", "Onions", "Spices"],
+    allergens: ["Dairy", "Nuts"]
   },
   {
     id: 20,
@@ -208,7 +231,8 @@ export const dishes: Dish[] = [
     protein: 16,
     carbs: 58,
     fats: 10,
-    ingredients: ["Kidney Beans", "Rice", "Tomatoes", "Onions", "Ginger", "Garlic", "Spices"]
+    ingredients: ["Kidney Beans", "Rice", "Tomatoes", "Onions", "Ginger", "Garlic", "Spices"],
+    allergens: []
   },
   {
     id: 21,
@@ -218,7 +242,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 28,
     fats: 3,
-    ingredients: ["Gram Flour", "Yogurt", "Semolina", "Mustard Seeds", "Curry Leaves", "Green Chilies"]
+    ingredients: ["Gram Flour", "Yogurt", "Semolina", "Mustard Seeds", "Curry Leaves", "Green Chilies"],
+    allergens: ["Gluten"]
   },
   {
     id: 22,
@@ -228,7 +253,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 42,
     fats: 12,
-    ingredients: ["Paneer", "Milk", "Sugar", "Saffron", "Cardamom", "Pistachios"]
+    ingredients: ["Paneer", "Milk", "Sugar", "Saffron", "Cardamom", "Pistachios"],
+    allergens: ["Dairy", "Nuts"]
   },
   {
     id: 23,
@@ -238,7 +264,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 38,
     fats: 6,
-    ingredients: ["Rice", "Moong Dal", "Black Pepper", "Cumin", "Cashews", "Curry Leaves"]
+    ingredients: ["Rice", "Moong Dal", "Black Pepper", "Cumin", "Cashews", "Curry Leaves"],
+    allergens: []
   },
   {
     id: 24,
@@ -248,7 +275,8 @@ export const dishes: Dish[] = [
     protein: 7,
     carbs: 22,
     fats: 9,
-    ingredients: ["Urad Dal", "Curry Leaves", "Ginger", "Green Chilies", "Black Pepper", "Oil"]
+    ingredients: ["Urad Dal", "Curry Leaves", "Ginger", "Green Chilies", "Black Pepper", "Oil"],
+    allergens: []
   },
   {
     id: 25,
@@ -258,7 +286,8 @@ export const dishes: Dish[] = [
     protein: 10,
     carbs: 32,
     fats: 5,
-    ingredients: ["Green Gram", "Rice", "Ginger", "Onions", "Green Chilies", "Cumin"]
+    ingredients: ["Green Gram", "Rice", "Ginger", "Onions", "Green Chilies", "Cumin"],
+    allergens: []
   },
   {
     id: 26,
@@ -268,7 +297,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 28,
     fats: 5,
-    ingredients: ["Puffed Rice", "Sev", "Onions", "Tomatoes", "Tamarind Chutney", "Green Chutney"]
+    ingredients: ["Puffed Rice", "Sev", "Onions", "Tomatoes", "Tamarind Chutney", "Green Chutney"],
+    allergens: ["Gluten"]
   },
   {
     id: 27,
@@ -278,7 +308,8 @@ export const dishes: Dish[] = [
     protein: 10,
     carbs: 38,
     fats: 18,
-    ingredients: ["Yogurt", "Gram Flour", "Onions", "Spices", "Turmeric", "Mustard Seeds"]
+    ingredients: ["Yogurt", "Gram Flour", "Onions", "Spices", "Turmeric", "Mustard Seeds"],
+    allergens: ["Dairy", "Gluten"]
   },
   {
     id: 28,
@@ -288,7 +319,8 @@ export const dishes: Dish[] = [
     protein: 35,
     carbs: 12,
     fats: 25,
-    ingredients: ["Fish", "Coconut", "Tomatoes", "Onions", "Curry Leaves", "Spices"]
+    ingredients: ["Fish", "Coconut", "Tomatoes", "Onions", "Curry Leaves", "Spices"],
+    allergens: []
   },
   {
     id: 29,
@@ -298,7 +330,8 @@ export const dishes: Dish[] = [
     protein: 7,
     carbs: 42,
     fats: 8,
-    ingredients: ["Rice", "Milk", "Sugar", "Cardamom", "Saffron", "Almonds", "Pistachios"]
+    ingredients: ["Rice", "Milk", "Sugar", "Cardamom", "Saffron", "Almonds", "Pistachios"],
+    allergens: ["Dairy", "Nuts"]
   },
   {
     id: 30,
@@ -308,7 +341,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 38,
     fats: 6,
-    ingredients: ["Rice", "Lentils", "Onions", "Tomatoes", "Green Chilies", "Curry Leaves"]
+    ingredients: ["Rice", "Lentils", "Onions", "Tomatoes", "Green Chilies", "Curry Leaves"],
+    allergens: []
   },
   {
     id: 31,
@@ -318,7 +352,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 22,
     fats: 18,
-    ingredients: ["Eggplant", "Tomatoes", "Onions", "Ginger", "Garlic", "Spices"]
+    ingredients: ["Eggplant", "Tomatoes", "Onions", "Ginger", "Garlic", "Spices"],
+    allergens: []
   },
   {
     id: 32,
@@ -328,7 +363,8 @@ export const dishes: Dish[] = [
     protein: 6,
     carbs: 32,
     fats: 8,
-    ingredients: ["Potato", "Cauliflower", "Tomatoes", "Onions", "Turmeric", "Spices"]
+    ingredients: ["Potato", "Cauliflower", "Tomatoes", "Onions", "Turmeric", "Spices"],
+    allergens: []
   },
   {
     id: 33,
@@ -338,7 +374,8 @@ export const dishes: Dish[] = [
     protein: 22,
     carbs: 42,
     fats: 14,
-    ingredients: ["Paratha", "Chicken/Paneer", "Onions", "Egg", "Sauces", "Spices"]
+    ingredients: ["Paratha", "Chicken/Paneer", "Onions", "Egg", "Sauces", "Spices"],
+    allergens: ["Gluten", "Egg"]
   },
   {
     id: 34,
@@ -348,7 +385,8 @@ export const dishes: Dish[] = [
     protein: 3,
     carbs: 58,
     fats: 6,
-    ingredients: ["Flour", "Sugar Syrup", "Yogurt", "Saffron", "Cardamom"]
+    ingredients: ["Flour", "Sugar Syrup", "Yogurt", "Saffron", "Cardamom"],
+    allergens: ["Gluten"]
   },
   {
     id: 35,
@@ -358,7 +396,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 35,
     fats: 5,
-    ingredients: ["Flattened Rice", "Peanuts", "Onions", "Turmeric", "Curry Leaves", "Lemon"]
+    ingredients: ["Flattened Rice", "Peanuts", "Onions", "Turmeric", "Curry Leaves", "Lemon"],
+    allergens: ["Nuts"]
   },
   {
     id: 36,
@@ -368,7 +407,8 @@ export const dishes: Dish[] = [
     protein: 6,
     carbs: 32,
     fats: 5,
-    ingredients: ["Semolina", "Vegetables", "Mustard Seeds", "Curry Leaves", "Cashews"]
+    ingredients: ["Semolina", "Vegetables", "Mustard Seeds", "Curry Leaves", "Cashews"],
+    allergens: ["Nuts"]
   },
   {
     id: 37,
@@ -378,7 +418,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 28,
     fats: 12,
-    ingredients: ["Okra", "Onions", "Tomatoes", "Spices", "Mango Powder"]
+    ingredients: ["Okra", "Onions", "Tomatoes", "Spices", "Mango Powder"],
+    allergens: []
   },
   {
     id: 38,
@@ -388,7 +429,8 @@ export const dishes: Dish[] = [
     protein: 6,
     carbs: 35,
     fats: 3,
-    ingredients: ["Paneer", "Sugar", "Cardamom", "Rose Water"]
+    ingredients: ["Paneer", "Sugar", "Cardamom", "Rose Water"],
+    allergens: ["Dairy"]
   },
   {
     id: 39,
@@ -398,7 +440,8 @@ export const dishes: Dish[] = [
     protein: 40,
     carbs: 15,
     fats: 35,
-    ingredients: ["Beef/Mutton", "Wheat Flour", "Ginger", "Garlic", "Spices", "Fried Onions"]
+    ingredients: ["Beef/Mutton", "Wheat Flour", "Ginger", "Garlic", "Spices", "Fried Onions"],
+    allergens: ["Gluten"]
   },
   {
     id: 40,
@@ -408,7 +451,8 @@ export const dishes: Dish[] = [
     protein: 35,
     carbs: 18,
     fats: 32,
-    ingredients: ["Minced Meat", "Peas", "Onions", "Tomatoes", "Ginger", "Garlic", "Spices"]
+    ingredients: ["Minced Meat", "Peas", "Onions", "Tomatoes", "Ginger", "Garlic", "Spices"],
+    allergens: []
   },
   {
     id: 41,
@@ -418,7 +462,8 @@ export const dishes: Dish[] = [
     protein: 4,
     carbs: 28,
     fats: 3,
-    ingredients: ["Rice", "Coconut", "Yeast", "Sugar"]
+    ingredients: ["Rice", "Coconut", "Yeast", "Sugar"],
+    allergens: []
   },
   {
     id: 42,
@@ -428,7 +473,8 @@ export const dishes: Dish[] = [
     protein: 5,
     carbs: 45,
     fats: 15,
-    ingredients: ["Gram Flour", "Ghee", "Sugar", "Cardamom"]
+    ingredients: ["Gram Flour", "Ghee", "Sugar", "Cardamom"],
+    allergens: ["Dairy"]
   },
   {
     id: 43,
@@ -438,7 +484,8 @@ export const dishes: Dish[] = [
     protein: 32,
     carbs: 15,
     fats: 22,
-    ingredients: ["Prawns", "Coconut Milk", "Tomatoes", "Onions", "Curry Leaves", "Spices"]
+    ingredients: ["Prawns", "Coconut Milk", "Tomatoes", "Onions", "Curry Leaves", "Spices"],
+    allergens: []
   },
   {
     id: 44,
@@ -448,7 +495,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 68,
     fats: 15,
-    ingredients: ["Basmati Rice", "Dry Fruits", "Saffron", "Ghee", "Spices", "Vegetables"]
+    ingredients: ["Basmati Rice", "Dry Fruits", "Saffron", "Ghee", "Spices", "Vegetables"],
+    allergens: ["Nuts", "Dairy"]
   },
   {
     id: 45,
@@ -458,7 +506,8 @@ export const dishes: Dish[] = [
     protein: 30,
     carbs: 65,
     fats: 22,
-    ingredients: ["Mutton", "Basmati Rice", "Yogurt", "Saffron", "Fried Onions", "Spices"]
+    ingredients: ["Mutton", "Basmati Rice", "Yogurt", "Saffron", "Fried Onions", "Spices"],
+    allergens: ["Dairy"]
   },
   {
     id: 46,
@@ -468,7 +517,8 @@ export const dishes: Dish[] = [
     protein: 10,
     carbs: 48,
     fats: 10,
-    ingredients: ["Wheat Flour", "Roasted Gram", "Eggplant", "Tomato", "Potato", "Spices"]
+    ingredients: ["Wheat Flour", "Roasted Gram", "Eggplant", "Tomato", "Potato", "Spices"],
+    allergens: ["Gluten"]
   },
   {
     id: 47,
@@ -478,7 +528,8 @@ export const dishes: Dish[] = [
     protein: 16,
     carbs: 58,
     fats: 14,
-    ingredients: ["Sprouted Beans", "Bread", "Farsan", "Onions", "Lemon", "Spices"]
+    ingredients: ["Sprouted Beans", "Bread", "Farsan", "Onions", "Lemon", "Spices"],
+    allergens: ["Gluten"]
   },
   {
     id: 48,
@@ -488,7 +539,8 @@ export const dishes: Dish[] = [
     protein: 8,
     carbs: 52,
     fats: 12,
-    ingredients: ["Bread", "Milk", "Sugar", "Saffron", "Cardamom", "Nuts"]
+    ingredients: ["Bread", "Milk", "Sugar", "Saffron", "Cardamom", "Nuts"],
+    allergens: ["Gluten", "Dairy", "Nuts"]
   },
   {
     id: 49,
@@ -498,7 +550,8 @@ export const dishes: Dish[] = [
     protein: 10,
     carbs: 62,
     fats: 20,
-    ingredients: ["Semolina", "Flour", "Sugar", "Ghee", "Chickpeas", "Spices"]
+    ingredients: ["Semolina", "Flour", "Sugar", "Ghee", "Chickpeas", "Spices"],
+    allergens: ["Gluten", "Dairy"]
   },
   {
     id: 50,
@@ -508,6 +561,7 @@ export const dishes: Dish[] = [
     protein: 35,
     carbs: 15,
     fats: 24,
-    ingredients: ["Chicken", "Yogurt", "Curry Leaves", "Red Chilies", "Ginger", "Garlic", "Spices"]
+    ingredients: ["Chicken", "Yogurt", "Curry Leaves", "Red Chilies", "Ginger", "Garlic", "Spices"],
+    allergens: ["Dairy", "Egg"]
   }
 ];
