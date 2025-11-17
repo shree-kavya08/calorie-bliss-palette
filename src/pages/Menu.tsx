@@ -4,13 +4,16 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import DishCard from '@/components/DishCard';
-import { dishes } from '@/data/dishes';
+import DishDetailsModal from '@/components/DishDetailsModal';
+import { dishes, Dish } from '@/data/dishes';
 import { Search, LogOut, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Menu = () => {
   const [selectedDishes, setSelectedDishes] = useState<Record<number, number>>({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -56,6 +59,11 @@ const Menu = () => {
   const filteredDishes = dishes.filter((dish) =>
     dish.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleDishClick = (dish: Dish) => {
+    setSelectedDish(dish);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen gradient-multi">
@@ -135,9 +143,17 @@ const Menu = () => {
               quantity={selectedDishes[dish.id] || 0}
               onIncrement={() => incrementDish(dish.id)}
               onDecrement={() => decrementDish(dish.id)}
+              onCardClick={() => handleDishClick(dish)}
             />
           ))}
         </div>
+
+        {/* Dish Details Modal */}
+        <DishDetailsModal
+          dish={selectedDish}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
 
         {filteredDishes.length === 0 && (
           <div className="text-center py-16">
