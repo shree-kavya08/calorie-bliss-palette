@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -6,8 +6,10 @@ import { Input } from '@/components/ui/input';
 import DishCard from '@/components/DishCard';
 import DishDetailsModal from '@/components/DishDetailsModal';
 import AllergenFilterBar from '@/components/AllergenFilterBar';
+import CalorieBudgetTracker from '@/components/CalorieBudgetTracker';
+import MealPlansModal from '@/components/MealPlansModal';
 import { dishes, Dish } from '@/data/dishes';
-import { Search, LogOut, Trash2 } from 'lucide-react';
+import { Search, LogOut, Trash2, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Menu = () => {
@@ -15,9 +17,27 @@ const Menu = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMealPlansOpen, setIsMealPlansOpen] = useState(false);
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
+  const [dailyBudget, setDailyBudget] = useState(2000);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const saved = localStorage.getItem('dailyCalorieBudget');
+    if (saved) setDailyBudget(Number(saved));
+  }, []);
+
+  const handleBudgetChange = (budget: number) => {
+    setDailyBudget(budget);
+    localStorage.setItem('dailyCalorieBudget', budget.toString());
+  };
+
+  const handleSelectMealPlan = (dishIds: number[]) => {
+    const newSelection: Record<number, number> = {};
+    dishIds.forEach(id => { newSelection[id] = 1; });
+    setSelectedDishes(newSelection);
+  };
 
   const handleLogout = () => {
     logout();
@@ -126,33 +146,31 @@ const Menu = () => {
             />
           </div>
 
+          <CalorieBudgetTracker
+            budget={dailyBudget}
+            consumed={totalCalories}
+            onBudgetChange={handleBudgetChange}
+          />
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="glass-card rounded-2xl p-6 text-center">
               <p className="text-sm mb-1 text-black/60">Unique Dishes</p>
-              <p className="text-3xl font-bold text-black">
-                {uniqueDishesCount}
-              </p>
+              <p className="text-3xl font-bold text-black">{uniqueDishesCount}</p>
             </div>
             <div className="glass-card rounded-2xl p-6 text-center">
               <p className="text-sm mb-1 text-black/60">Total Items</p>
-              <p className="text-3xl font-bold text-black">
-                {totalItemsCount}
-              </p>
+              <p className="text-3xl font-bold text-black">{totalItemsCount}</p>
             </div>
             <div className="glass-card rounded-2xl p-6 text-center">
               <p className="text-sm mb-1 text-black/60">Total Calories</p>
-              <p className="text-3xl font-bold text-black">
-                {totalCalories} kcal
-              </p>
+              <p className="text-3xl font-bold text-black">{totalCalories} kcal</p>
             </div>
-            <div className="glass-card rounded-2xl p-6">
-              <Button
-                onClick={clearSelection}
-                disabled={uniqueDishesCount === 0}
-                className="w-full h-12 rounded-xl bg-muted text-muted-foreground hover:bg-muted/80 disabled:opacity-50"
-              >
-                <Trash2 className="w-4 h-4 mr-2" />
-                Clear Selection
+            <div className="glass-card rounded-2xl p-6 flex gap-2">
+              <Button onClick={() => setIsMealPlansOpen(true)} className="flex-1 h-12 rounded-xl gradient-purple text-white">
+                <Calendar className="w-4 h-4 mr-2" />Meal Plans
+              </Button>
+              <Button onClick={clearSelection} disabled={uniqueDishesCount === 0} variant="outline" className="h-12 rounded-xl">
+                <Trash2 className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -172,12 +190,8 @@ const Menu = () => {
           ))}
         </div>
 
-        {/* Dish Details Modal */}
-        <DishDetailsModal
-          dish={selectedDish}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+        <DishDetailsModal dish={selectedDish} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <MealPlansModal isOpen={isMealPlansOpen} onClose={() => setIsMealPlansOpen(false)} onSelectPlan={handleSelectMealPlan} />
 
         {filteredDishes.length === 0 && (
           <div className="text-center py-16">

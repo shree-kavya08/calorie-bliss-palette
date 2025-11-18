@@ -30,15 +30,16 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-multi flex items-center justify-center p-4">
-      <div className="w-full max-w-md animate-scale-in">
-        <div className="glass-card rounded-2xl p-8 shadow-glow">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-cool mb-4">
-              <LogIn className="w-8 h-8 text-white" />
+    <div className="min-h-screen gradient-multi flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00ek0yNiAzNGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+      <div className="w-full max-w-md animate-scale-in relative z-10">
+        <div className="glass-card rounded-3xl p-10 shadow-glow border-2 border-white/20">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl gradient-cool mb-6 shadow-glow animate-float">
+              <LogIn className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
-            <p className="text-muted-foreground">Login to your Calorie Compass</p>
+            <h1 className="text-4xl font-bold text-foreground mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Welcome Back</h1>
+            <p className="text-muted-foreground text-lg">Sign in to continue your journey</p>
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
